@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .register-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="register-container">
+            <h2 class="text-center">新規登録</h2>
+            <form action="/register/post" method="POST">
+                <div class="form-group">
+                    <label for="userId">ユーザーID</label>
+                    <input type="text" class="form-control" id="userId" name="userId" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">ユーザー名</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="major">専攻</label>
+                    <select class="form-control" id="major" name="major">
+                        <option value="cs">Computer Science</option>
+                        <option value="math">Mathematics</option>
+                        <option value="bio">Biology</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">登録</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

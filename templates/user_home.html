@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ユーザーホーム</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .home-container {
+            margin: 50px auto;
+            max-width: 800px;
+        }
+        .header {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container home-container">
+        <div class="header text-center">
+            <h2>{{ user_id }}さんのホーム画面</h2>
+        </div>
+        <div class="text-right mb-4">
+            <a href="/logout" class="btn btn-danger">ログアウト</a>
+        </div>
+        <div class="mb-4">
+            <h4>{{ user_id }}さんの貸出履歴</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>レンタルID</th>
+                        <th>ISBN</th>
+                        <th>タイトル</th>
+                        <th>レンタル日</th>
+                        <th>返却日</th>
+                        <!-- <th>操作</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ダミーデータの例 -->
+                    <!-- <tr>
+                        <td>1</td>
+                        <td>978-4-1234-5678-9</td>
+                        <td>プログラミング入門</td>
+                        <td>2024-01-15</td>
+                        <td>2024-02-15</td>
+                        <td><button class="btn btn-secondary" onclick="returnBook(1)">返却申請</button></td>
+                    </tr> -->
+                    <!-- <tr>
+                        <td>2</td>
+                        <td>978-4-5678-1234-5</td>
+                        <td>データサイエンス基礎</td>
+                        <td>2024-03-10</td>
+                        <td>2024-04-10</td>
+                        <td><button class="btn btn-secondary" onclick="returnBook(2)">返却申請</button></td>
+                    </tr> -->
+                    <!-- {% for rental in rental_list %}
+                        <tr>
+                            <td>{{ rental['rentalid'] }}</td>
+                            <td>{{ rental.isbn }}</td>                        
+                            <td>{{ rental.title }}</td>                        
+                            <td>{{ rental.rental_date }}</td>                        
+                            <td>{{ rental.return_date }}</td>
+                            <td>            
+                                {% if not rental.return_date %}
+                                <button class="btn btn-danger" onclick="deleteRental('{{ rental.rentalid }}')">返却</button>
+                                {% endif %}
+                            </td>                     
+                        </tr>
+                    {% endfor %} -->
+
+                    {% for rental in rental_list %}
+                    <tr>
+                        <td>{{ rental['rentalid'] }}</td>
+                        <td>{{ rental.isbn }}</td>                        
+                        <td>{{ rental.title }}</td>                        
+                        <td>{{ rental.rental_date }}</td>                        
+                        <td>
+                            {% if not rental.return_date %}
+                                <button class="btn btn-danger" onclick="deleteRental('{{ rental.rentalid }}')">返却</button>
+                            {% else %}
+                                {{ rental.return_date }}
+                            {% endif %}
+                        </td>                     
+                    </tr>
+                    {% endfor %}
+
+                    <!-- 他のデータも同様に追加 -->
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <a href="/user_home/book_list" class="btn btn-primary mb-2">本の一覧取得・検索・貸出</a>
+        </div>
+    </div>
+
+    <script>
+        function deleteRental(rentalid) {
+            if (confirm('本当に返却しますか？')) {
+                fetch('/return_rental', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 'rentalid': rentalid })
+                })
+                // .then(response => {
+                //     if (response.ok) {
+                //         window.location.reload();
+                //     } else {
+                //         alert('返却に失敗しました');
+                //     }
+                // });
+            }
+        }
+    </script>
+    
+    
+</body>
+</html>

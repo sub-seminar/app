@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本の一覧取得・検索・貸出</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .book-list-container {
+            margin: 50px auto;
+            max-width: 1000px;
+        }
+        .header {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container book-list-container">
+        <div class="header text-center">
+            <h2>本の一覧取得・検索・貸出</h2>
+        </div>
+        <div class="text-right mb-4">
+            <a href="/logout" class="btn btn-danger">ログアウト</a>
+        </div>
+        <div class="mb-4">
+            <form id="searchForm" class="form-inline justify-content-center mb-3" method="POST" action="/user_home/book_list">
+                <input type="text" class="form-control mr-2" id="searchKeyword" name="searchKeyword" placeholder="タイトルで検索">
+                <button type="submit" class="btn btn-primary">検索</button>
+            </form>
+            <h4>本の一覧</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ISBN</th>
+                        <th>タイトル</th>
+                        <th>ジャンル</th>
+                        <th>著者</th>
+                        <th>出版日</th>
+                        <th>出版社</th>
+                        <!-- <th>在庫数</th> -->
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="bookList">
+                    <!-- ダミーデータの例 -->
+                    <!-- <tr>
+                        <td>978-4-1234-5678-9</td>
+                        <td>プログラミング入門</td>
+                        <td>テクノロジー</td>
+                        <td>山田 太郎</td>
+                        <td>2020-01-15</td>
+                        <td>技術出版社</td>
+                        
+                        <td><button class="btn btn-primary" onclick="requestBookLoan('978-4-1234-5678-9')">貸出申請</button></td>
+                    </tr> -->
+                    <!-- <tr>
+                        <td>978-4-5678-1234-5</td>
+                        <td>データサイエンス基礎</td>
+                        <td>サイエンス</td>
+                        <td>鈴木 一郎</td>
+                        <td>2019-03-10</td>
+                        <td>学術出版社</td>
+                        
+                        <td><button class="btn btn-primary" onclick="requestBookLoan('978-4-5678-1234-5')">貸出申請</button></td>
+                    </tr> -->
+
+                    {% for book in book_list %}
+                    <tr>
+                        <td>{{ book.isbn }}</td>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.genre }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.publish_date }}</td>
+                        <td>{{ book.publisher }}</td>
+                        <td>
+                            {% if book.isbn in borrowed_isbns %}
+                                貸出中
+                            {% else %}
+                                <button class="btn btn-primary" onclick="requestBookLoan('{{ book.isbn }}')">貸出申請</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <!-- 他のデータも同様に追加 -->
+
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <!-- <a href="/return_user_home" class="btn btn-secondary mb-2">ユーザーホームに戻る</a> -->
+            <a href="{{ return_url }}" class="btn btn-secondary mb-2">ユーザーホームに戻る</a>
+        </div>
+    </div>
+
+    <script>
+        function requestBookLoan(isbn) {
+            if (confirm('この本を貸出申請しますか？')) {
+                fetch('/request_loan', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 'isbn': isbn, 'userid': 'some_user_id' }) // 'some_user_id' は実際のユーザーIDに置き換えてください
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        alert('貸出申請に失敗しました');
+                    }
+                });
+            }
+        }
+    </script>
+      
+</body>
+</html>
+
+

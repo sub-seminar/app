@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理者ホーム</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+        .home-container {
+            margin: 50px auto;
+            max-width: 800px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            margin-bottom: 30px;
+            color: #003366;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .btn-primary {
+            background-color: #003366;
+            border-color: #003366;
+        }
+        .btn-primary:hover {
+            background-color: #002244;
+            border-color: #002244;
+        }
+        .btn-danger {
+            background-color: #cc0000;
+            border-color: #cc0000;
+        }
+        .btn-danger:hover {
+            background-color: #990000;
+            border-color: #990000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container home-container">
+        <div class="header text-center">
+            <h2>管理者ホーム画面</h2>
+        </div>
+        <div class="text-right mb-4">
+            <a href="/logout" class="btn btn-danger">ログアウト</a>
+        </div>
+        <div class="mb-4">
+            <h4>貸出履歴</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>レンタルID</th>
+                        <th>ISBN</th>
+                        <th>ユーザーID</th>
+                        <th>レンタル日</th>
+                        <th>返却日</th>
+                        <!-- <th>操作</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ダミーデータの例 -->
+                    <!-- <tr>
+                        <td>1</td>
+                        <td>978-4-1234-5678-9</td>
+                        <td>user123</td>
+                        <td>2024-01-15</td>
+                        <td>2024-02-15</td>
+                        <td><button class="btn btn-danger" onclick="deleteRental(1)">削除</button></td>
+                    </tr> -->
+                    <!-- <tr>
+                        <td>2</td>
+                        <td>978-4-5678-1234-5</td>
+                        <td>user456</td>
+                        <td>2024-03-10</td>
+                        <td>2024-04-10</td>
+                        <td><button class="btn btn-danger" onclick="deleteRental(2)">削除</button></td>
+                    </tr> -->
+
+                {% for rental in rental_list %}
+                    <tr>
+                        <td>{{ rental['rentalid'] }}</td>
+                        <td>{{ rental.isbn }}</td>                        
+                        <td>{{ rental.userid }}</td>                        
+                        <td>{{ rental.rental_date }}</td>                        
+                        <td>{{ rental.return_date }}</td>
+                        <!-- <td><button class="btn btn-danger" onclick="deleteRental()">削除</button></td>                      -->
+                    </tr>
+                {% endfor %}
+                    <tr>
+
+                    </tr>
+                    <!-- 他のデータも同様に追加 -->
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <a href="/admin_home/book_inventory" class="btn btn-primary mb-2">在庫確認</a>
+            <a href="/admin_home/users" class="btn btn-primary mb-2">ユーザー情報確認</a>
+        </div>
+    </div>
+
+    <script>
+        function deleteRental(rentalId) {
+            // 削除処理をここに記述
+            alert('レンタルID: ' + rentalId + ' が削除されました。');
+        }
+    </script>
+</body>
+</html>
