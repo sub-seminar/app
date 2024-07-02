@@ -35,10 +35,10 @@ git clone https://github.com/sub-seminar/book_management_system.git
 cd [任意の階層]/book_management_system
 
 # 環境構築
-docker build -t flask-app .
+docker build -t book_management_system .
 
 # アプリ実行
-docker run -p 5050:5050 flask-app
+docker run -p 5050:5050 book_management_system
 
 # ブラウザでURLにアクセス
 http://127.0.0.1:5050
