@@ -52,5 +52,19 @@ http://127.0.0.1:5050
 
 ## ●アプリの使用方法
 
+指定されたURLをブラウザに入力すると次のようなログイン画面に遷移します。
+<img width="1064" alt="スクリーンショット 2024-07-03 1 28 19" src="https://github.com/sub-seminar/book_management_system/assets/148195758/30fb166e-fba2-4119-b146-6b807c171244">
+
+利用者は各々が持つuseridを入力してログインします。  
+管理者：管理者ID  
+一般ユーザー：一般ユーザーID（未所持の場合は、「新規登録はこちら」をクリック）
+
+
+### ●開発者
+新井陽登（Arai Haruto）：フロントエンド（HTML,CSS,JavaScript）  
+小村涼太郎（Komura Ryotaro）：バックエンド（Flask・SQL）  
+リクカケツ（Riku）：データベース（SQL・SQlite3）  
+小原和磨（Obara Kazuma）：マネジメント  
+
 
 
