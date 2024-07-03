@@ -26,7 +26,7 @@
 <br><br><br>
 ## ●アプリのインストール方法
 
-①dockerのインストールして起動：https://www.docker.com/ja-jp/
+①dockerをインストールして起動：https://www.docker.com/ja-jp/
 
 ②コマンドの実行
 ### 
