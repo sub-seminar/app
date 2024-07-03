@@ -114,9 +114,9 @@ useridを入力してログインしてください。
 
 
 ##### ●開発者
-新井陽登（Arai Haruto）：フロントエンド（HTML,CSS,JavaScript）  
-小村涼太郎（Komura Ryotaro）：バックエンド（Flask・SQL）  
-リクカケツ（Riku）：データベース（SQL・SQlite3）  
+新井陽登（Arai Haruto）：フロントエンド（HTML,CSS,Bootstrap,JavaScript）  
+小村涼太郎（Komura Ryotaro）：バックエンド（Python,Flask,SQL）  
+リクカケツ（Riku）：データベース（SQL,SQlite3）  
 小原和磨（Obara Kazuma）：マネジメント  
 
 
